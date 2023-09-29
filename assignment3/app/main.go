@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"go-assignments/assignment3/domain"
-	"go-assignments/assignment3/mapstore"
+
+	"assignment3/domain"
+	"assignment3/mapstore"
 )
 
 type CustomerController struct {

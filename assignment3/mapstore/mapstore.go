@@ -1,8 +1,8 @@
 package mapstore
 
 import (
+	"assignment3/domain"
 	"errors"
-	"go-assignments/assignments3/domain"
 	"sync"
 )
 
