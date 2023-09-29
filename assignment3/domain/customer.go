@@ -12,7 +12,7 @@ type Customer struct {
 
 type CustomerStore interface {
 	CreateCustomer(Customer) error
-	UpdateCustomer(string Customer) error
+	UpdateCustomer(string, Customer) error
 	DeleteCustomer(string) error
 	GetCustomerByID(string) (Customer, error)
 	GetAllCustomers() ([]Customer, error)
