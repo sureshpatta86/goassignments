@@ -24,7 +24,7 @@ func (ms *MapStore) CreateCustomer(c domain.Customer) error {
 	defer ms.mu.Unlock()
 
 	if _, ok := ms.store[c.ID]; ok {
-		return errors.New("Customer already exist")
+		return errors.New("customer already exist")
 	}
 	ms.store[c.ID] = c
 	return nil
@@ -36,7 +36,7 @@ func (ms *MapStore) UpdateCustomer(id string, c domain.Customer) error {
 	defer ms.mu.Unlock()
 
 	if _, ok := ms.store[id]; !ok {
-		return errors.New("Customer not found to update")
+		return errors.New("customer not found to update")
 	}
 
 	ms.store[id] = c
@@ -49,7 +49,7 @@ func (ms *MapStore) DeleteCustomer(id string) error {
 	defer ms.mu.Unlock()
 
 	if _, ok := ms.store[id]; !ok {
-		return errors.New("Customer not found to delete")
+		return errors.New("customer not found to delete")
 	}
 
 	delete(ms.store, id)
@@ -64,7 +64,7 @@ func (ms *MapStore) GetCustomerByID(id string) (domain.Customer, error) {
 	c, ok := ms.store[id]
 
 	if !ok {
-		return domain.Customer{}, errors.New("Customer not found to get details")
+		return domain.Customer{}, errors.New("customer not found to get details")
 	}
 
 	return c, nil
@@ -73,5 +73,13 @@ func (ms *MapStore) GetCustomerByID(id string) (domain.Customer, error) {
 // Get All Customers
 func (ms *MapStore) GetAllCustomers() ([]domain.Customer, error) {
 
-	return domain.Customer, nil
+	ms.mu.RLock()
+	defer ms.mu.RUnlock()
+
+	customers := make([]domain.Customer, 0, len(ms.store))
+	for _, c := range ms.store {
+		customers = append(customers, c)
+	}
+
+	return customers, nil
 }

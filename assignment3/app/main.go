@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-
 	"assignment3/domain"
 	"assignment3/mapstore"
 )
